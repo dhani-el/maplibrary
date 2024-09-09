@@ -11,14 +11,41 @@ export default function BasicMap({longitude,latitude,zoom,accessToken}:BasicMapP
     const [Zoom, setZoom] = useState(zoom);
     const mapContainerRef = useRef<HTMLDivElement>(null);
     useEffect(()=>{
-        mapboxgl.accessToken = accessToken
+        mapboxgl.accessToken = accessToken;
+        let map
+        const geojson = {
+            type: 'FeatureCollection',
+            features: [
+              {
+                type: 'Feature',
+                geometry: {
+                  type: 'Point',
+                  coordinates: [Longitude, Latitude]
+                },
+                properties: {
+                  title: 'Mapbox',
+                  description: 'Washington, D.C.'
+                }
+              },
+            ]
+          };
         if (mapContainerRef.current !== null) {
-                new mapboxgl.Map({
+                map = new mapboxgl.Map({
                     container:mapContainerRef.current,
                     center:[Longitude,Latitude],
-                    zoom:Zoom
+                    zoom:Zoom,
                 })
         }
+
+        for (const feature of geojson.features) {
+  
+            // code from step 5-1 will go here
+          
+            // make a marker for each feature and add to the map
+            new mapboxgl.Marker().setLngLat(new mapboxgl.LngLat(feature.geometry.coordinates[0],feature.geometry.coordinates[1])).addTo(map as mapboxgl.Map);  // Replace this line with code from step 5-2
+          
+             //code from step 6 will go here
+          }
 
     });
 
