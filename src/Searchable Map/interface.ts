@@ -6,3 +6,8 @@ export interface SearchableMapProps{
     zoom:number,
     accessToken:string
 }
+
+export interface SearchBarProps{
+    accessToken:string,
+    country:string,
+}

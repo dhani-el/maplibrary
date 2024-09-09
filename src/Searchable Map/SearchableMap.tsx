@@ -3,13 +3,14 @@ import {useEffect,useRef, useState} from "react";
 import mapboxgl from "mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 import { SearchableMapProps } from "./interface";
-import "./style.scss"
+import "./style.scss";
 
 export default function SearchableMap({longitude,latitude,zoom,accessToken}:SearchableMapProps){
     const [Longitude, setLongitude] = useState(longitude);
     const [Latitude, setLatitude] = useState(latitude);
     const [Zoom, setZoom] = useState(zoom);
     const mapContainerRef = useRef<HTMLDivElement>(null);
+
     useEffect(()=>{
         mapboxgl.accessToken = accessToken;
 
@@ -27,10 +28,12 @@ export default function SearchableMap({longitude,latitude,zoom,accessToken}:Sear
         setLatitude(()=>latitude);
         setLongitude(()=>longitude);
         setZoom(()=>Zoom)
-    },[longitude,latitude,zoom,accessToken])
+    },[longitude,latitude,zoom,accessToken]);
 
     return (
-                <div id="mapContainer" ref={mapContainerRef}>
+                <div id="main-container">
+                    <div id="mapContainer" ref={mapContainerRef}>
+                    </div>
                 </div>
             )
 }
