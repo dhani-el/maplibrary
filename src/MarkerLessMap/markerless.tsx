@@ -2,10 +2,10 @@
 import {useEffect,useRef, useState} from "react";
 import mapboxgl from "mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
-import { BasicMapProps } from "./interface";
+import { MarkerlessMapProps } from "./interface";
 import "./style.scss"
 
-export default function MarkerlessMap({longitude,latitude,zoom,accessToken}:BasicMapProps){
+export default function MarkerlessMap({longitude,latitude,zoom,accessToken}:MarkerlessMapProps){
     const [Longitude, setLongitude] = useState(longitude);
     const [Latitude, setLatitude] = useState(latitude);
     const [Zoom, setZoom] = useState(zoom);
