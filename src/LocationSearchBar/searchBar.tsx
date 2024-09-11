@@ -24,14 +24,20 @@ export default  function SearchBarComponent({mapKey,exposeResult}:SearchBarCompo
     }
 
     useEffect(()=>{
-        processAddress(inputValue);
+      const timeout =  setTimeout(() => {
+            processAddress(inputValue);
+        }, 1500);
+
+        return ()=>{
+            clearTimeout(timeout)
+        }
     },[inputValue])
 
     return <div id="search-bar-container">
-                <input value={inputValue} onChange={(e)=>{handleChange(e.target.value)}} />
+                <input id="search-bar-input" value={inputValue} onChange={(e)=>{handleChange(e.target.value)}} />
             </div>
 }
 
 // fetch(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${AutoLocation?.lat},${AutoLocation?.lng}&key=${mapkey}`)
-// map key AIzaSyCGvCxKjSzfDtVS6fxJTUEeUXDI_UaDxGM
+// map key AIzaSyCGvCxKjSzfDtVS6fxJTUEeUXDI_UaDxGM 
 //  map id  de861107584712d2

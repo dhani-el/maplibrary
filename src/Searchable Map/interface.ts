@@ -1,5 +1,5 @@
 
-import { locationTypes } from "../LocationDropDown/interface"
+
 
 export interface SearchableMapProps{
     longitude:number,
@@ -11,7 +11,7 @@ export interface SearchableMapProps{
 
 export interface ISearchResult{
     formatted_address:string,
-    type:locationTypes,
+    types:string[],
     latitude:number,
     longitude:number
 }

@@ -26,11 +26,13 @@ export enum locationTypes{
 
 export interface ALocationDropdownProps{
     formatted_address:string,
-    type: locationTypes
+    types: string[]
 }
 
 export interface LocationDropdownProps{
     locations:ALocationDropdownProps[]
 }
 
-
+export interface TypesIconProps{
+    type:string
+}

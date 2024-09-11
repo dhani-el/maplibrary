@@ -1,0 +1,28 @@
+
+#location-container , #location-container *{
+    box-sizing: border-box;
+}
+
+#location-container{
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    width: 80%;
+    border: black 0.02rem solid;
+    border-bottom-left-radius: 0.5rem;
+    border-bottom-right-radius: 0.5rem;
+    #a-location-container{
+        padding: 0.2rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        background-color: whitesmoke;
+        #a-location-container-type{
+            width: 10%;
+        }
+        #a-location-container-adress{
+            width: 86%;
+        }
+    }
+}

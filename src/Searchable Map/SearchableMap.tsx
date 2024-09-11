@@ -6,7 +6,6 @@ import { SearchableMapProps } from "./interface";
 import "./style.scss";
 import SearchBar from "../LocationSearchBar/searchBar";
 import LocationDropdown from "../LocationDropDown/dropdown";
-// import { LocationDropdownProps,locationTypes } from "../LocationDropDown/interface";
 import { ISearchResult } from "./interface";
 
 export default function SearchableMap({longitude,latitude,zoom,accessToken,mapKey}:SearchableMapProps){
@@ -27,20 +26,20 @@ export default function SearchableMap({longitude,latitude,zoom,accessToken,mapKe
                 })
         }
 
-    });
+    },[longitude,latitude,zoom,accessToken]);
 
 
     useEffect(()=>{
         setLatitude(()=>latitude);
         setLongitude(()=>longitude);
         setZoom(()=>Zoom)
-    },[longitude,latitude,zoom,accessToken]);
+    },[longitude,latitude]);
 
     return (
                 <div id="main-container">
                     <div id="mapContainer" ref={mapContainerRef}>
                     </div>
-                    <div>
+                    <div id="search-dropdown-container">
                         <SearchBar mapKey={mapKey} exposeResult={setSearchResult} />
                         <LocationDropdown locations={searchResult} />
                     </div>

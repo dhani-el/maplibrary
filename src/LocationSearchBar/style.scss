@@ -1,8 +1,13 @@
 
+*{
+    box-sizing: border-box;
+}
 
 #search-bar-container{
-    position: absolute;
-    top: 5vh;
-    left: 0px;
-    
+        width: 80%;
+        #search-bar-input{
+            width: 100%;
+            padding: 0.7rem 0.5rem;
+            text-align: center;
+        }
 }
