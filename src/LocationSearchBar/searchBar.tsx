@@ -37,7 +37,3 @@ export default  function SearchBarComponent({mapKey,exposeResult}:SearchBarCompo
                 <input id="search-bar-input" value={inputValue} onChange={(e)=>{handleChange(e.target.value)}} />
             </div>
 }
-
-// fetch(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${AutoLocation?.lat},${AutoLocation?.lng}&key=${mapkey}`)
-// map key AIzaSyCGvCxKjSzfDtVS6fxJTUEeUXDI_UaDxGM 
-//  map id  de861107584712d2

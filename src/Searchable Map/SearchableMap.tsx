@@ -2,7 +2,7 @@
 import {useEffect,useRef, useState} from "react";
 import mapboxgl from "mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
-import { SearchableMapProps } from "./interface";
+import { Location, SearchableMapProps } from "./interface";
 import "./style.scss";
 import SearchBar from "../LocationSearchBar/searchBar";
 import LocationDropdown from "../LocationDropDown/dropdown";
@@ -14,20 +14,35 @@ export default function SearchableMap({longitude,latitude,zoom,accessToken,mapKe
     const [Zoom, setZoom] = useState(zoom);
     const mapContainerRef = useRef<HTMLDivElement>(null);
     const [searchResult,setSearchResult] = useState<ISearchResult[]>([]);
+    const [pointChosen,setPointChosen] = useState<Location>();
+    const [showDropDown,setShowDropDown] = useState<boolean>(false);
+
+    function expose(lat:number,lng:number){
+        setPointChosen(()=>({lat,lng}));
+        setShowDropDown(()=>false);
+    }
 
     useEffect(()=>{
+        
         mapboxgl.accessToken = accessToken;
-
+          let map
         if (mapContainerRef.current !== null) {
-                new mapboxgl.Map({
+               map = new mapboxgl.Map({
                     container:mapContainerRef.current,
-                    center:[Longitude,Latitude],
-                    zoom:Zoom,
+                    center:[pointChosen?.lng||Longitude,pointChosen?.lat||Latitude],
+                    zoom:(pointChosen?.lng?17:Zoom)
                 })
+
         }
+        new mapboxgl.Marker().setLngLat(new mapboxgl.LngLat(pointChosen?.lng||Longitude , pointChosen?.lat||Latitude)).addTo(map as mapboxgl.Map); 
+    },[pointChosen]);
 
-    },[longitude,latitude,zoom,accessToken]);
-
+    useEffect(()=>{
+        if (searchResult.length>0) {
+            
+            setShowDropDown(()=>true)
+        }
+    },[searchResult]);
 
     useEffect(()=>{
         setLatitude(()=>latitude);
@@ -41,7 +56,7 @@ export default function SearchableMap({longitude,latitude,zoom,accessToken,mapKe
                     </div>
                     <div id="search-dropdown-container">
                         <SearchBar mapKey={mapKey} exposeResult={setSearchResult} />
-                        <LocationDropdown locations={searchResult} />
+                        {showDropDown && <LocationDropdown locations={searchResult} exposeCoordinates={expose}/>}
                     </div>
                 </div>
             )

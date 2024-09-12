@@ -10,9 +10,18 @@ export interface SearchableMapProps{
 }
 
 export interface ISearchResult{
+
     formatted_address:string,
     types:string[],
-    latitude:number,
-    longitude:number
+    geometry:{
+        location:{
+            lat:number,
+            lng:number,
+        }
+    }
 }
 
+export interface Location{
+    lat:number,
+    lng:number
+}
